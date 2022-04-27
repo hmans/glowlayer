@@ -16,11 +16,6 @@ import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js
 
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26_mod.gltf");
-
-  /* The emissive intensity in the GLTF is always capped to 1,
-     so let's increase it manually */
-  gltf.materials["Imphenzia"].emissiveIntensity = 1;
-
   return <primitive object={gltf.scene} />;
 };
 
