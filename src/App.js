@@ -55,7 +55,15 @@ const Scene = () => {
 };
 
 export const App = () => (
-  <Canvas gl={{ logarithmicDepthBuffer: true }}>
+  <Canvas
+    gl={{
+      logarithmicDepthBuffer: true,
+      powerPreference: "high-performance",
+      antialias: false,
+      stencil: false,
+      depth: false,
+    }}
+  >
     <color args={["#333"]} attach="background" />
     <Scene />
   </Canvas>
