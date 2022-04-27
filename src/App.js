@@ -1,9 +1,14 @@
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { render } from "@testing-library/react";
 import {
+  AdaptiveLuminancePass,
   BloomEffect,
+  ClearPass,
+  CopyPass,
   EffectComposer,
   EffectPass,
+  LuminancePass,
   RenderPass,
   VignetteEffect,
 } from "postprocessing";
@@ -20,7 +25,10 @@ const Scene = () => {
 
   useFrame(({ gl, scene, camera }) => {
     if (!composer) {
-      composer = new EffectComposer(gl, { frameBufferType: HalfFloatType });
+      composer = new EffectComposer(gl, {
+        depthBuffer: true,
+        frameBufferType: HalfFloatType,
+      });
 
       const renderScenePass = new RenderPass(scene, camera);
 
@@ -35,8 +43,12 @@ const Scene = () => {
         })
       );
 
+      const luminancePass = new LuminancePass();
+
       composer.addPass(renderScenePass);
-      composer.addPass(sceneEffectPass);
+      // composer.addPass(luminancePass);
+
+      console.log(composer);
     }
 
     composer.render();
@@ -59,9 +71,6 @@ export const App = () => (
     gl={{
       logarithmicDepthBuffer: true,
       powerPreference: "high-performance",
-      antialias: false,
-      stencil: false,
-      depth: false,
     }}
   >
     <color args={["#333"]} attach="background" />
