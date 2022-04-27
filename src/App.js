@@ -53,7 +53,7 @@ const Scene = () => {
   return (
     <>
       <ambientLight intensity={0.2} />
-      <directionalLight intensity={1} position={[10, 10, 10]} />
+      <directionalLight intensity={0.5} position={[10, 10, 10]} />
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
@@ -63,7 +63,7 @@ const Scene = () => {
         <meshStandardMaterial
           color="white"
           emissive="white"
-          emissiveIntensity={3}
+          emissiveIntensity={2}
         />
       </mesh>
 
