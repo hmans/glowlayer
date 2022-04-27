@@ -1,6 +1,8 @@
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 import {
+  CubeTextureLoader,
   HalfFloatType,
   LinearEncoding,
   NoToneMapping,
@@ -59,7 +61,7 @@ const Scene = () => {
   return (
     <>
       <ambientLight intensity={0.2} />
-      <directionalLight intensity={0.5} position={[20, 20, 0]} />
+      <directionalLight intensity={0.5} position={[20, 0, -10]} />
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
@@ -84,6 +86,27 @@ const Scene = () => {
   );
 };
 
+export const Skybox = () => {
+  const { scene } = useThree();
+
+  useEffect(() => {
+    const urls = [
+      "/textures/skybox/right.png",
+      "/textures/skybox/left.png",
+      "/textures/skybox/top.png",
+      "/textures/skybox/bottom.png",
+      "/textures/skybox/front.png",
+      "/textures/skybox/back.png",
+    ];
+
+    const cube = new CubeTextureLoader().load(urls);
+
+    scene.background = cube;
+  }, []);
+
+  return null;
+};
+
 export const App = () => (
   <Canvas
     gl={{
@@ -91,7 +114,7 @@ export const App = () => (
       toneMapping: NoToneMapping,
     }}
   >
-    <color args={["#666"]} attach="background" />
+    <Skybox />
     <Scene />
   </Canvas>
 );
