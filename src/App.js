@@ -4,7 +4,7 @@ import {
   PerspectiveCamera,
   useGLTF,
 } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26.gltf");
@@ -12,6 +12,10 @@ const Spaceship = () => {
 };
 
 const Scene = () => {
+  useFrame(({ scene, camera, gl }) => {
+    gl.render(scene, camera);
+  }, 1);
+
   return (
     <>
       <ambientLight intensity={0.2} />
