@@ -37,7 +37,7 @@ const Scene = () => {
 
       const sceneRenderPass = new RenderPass(scene, camera);
       const unrealPass = new UnrealBloomPass(
-        new Vector2(1024, 1024),
+        new Vector2(window.innerWidth, window.innerHeight),
         1.2,
         0.01,
         0.9
