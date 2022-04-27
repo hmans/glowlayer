@@ -1,18 +1,16 @@
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
 import {
   HalfFloatType,
   LinearEncoding,
-  WebGLRenderTarget,
   Vector2,
-  UnsignedByteType,
+  WebGLRenderTarget,
 } from "three";
+import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
-import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 
 const Spaceship = () => {
