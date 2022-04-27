@@ -1,11 +1,9 @@
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
-  ACESFilmicToneMapping,
   HalfFloatType,
   LinearEncoding,
   NoToneMapping,
-  ReinhardToneMapping,
   Vector2,
   WebGLRenderTarget,
 } from "three";
