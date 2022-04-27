@@ -40,8 +40,8 @@ const Scene = () => {
       const unrealPass = new UnrealBloomPass(
         new Vector2(window.innerWidth, window.innerHeight),
         1.2,
-        0.01,
-        0.9
+        0.5,
+        0.8
       );
       const luminosityPass = new ShaderPass(LuminosityShader);
       const toneMappingPass = new AdaptiveToneMappingPass(true, 256);
@@ -58,8 +58,8 @@ const Scene = () => {
 
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight intensity={0.6} position={[-10, -10, -10]} />
+      <ambientLight intensity={0.2} />
+      <directionalLight intensity={0.5} position={[20, 20, 0]} />
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
