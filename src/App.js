@@ -1,9 +1,4 @@
-import {
-  Box,
-  OrbitControls,
-  PerspectiveCamera,
-  useGLTF,
-} from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 
 const Spaceship = () => {
