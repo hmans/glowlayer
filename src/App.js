@@ -51,7 +51,7 @@ const Scene = () => {
 
       composer.addPass(sceneRenderPass);
       composer.addPass(unrealPass);
-      composer.addPass(toneMappingPass);
+      // composer.addPass(toneMappingPass);
       composer.addPass(vignettePass);
     }
 
