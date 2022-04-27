@@ -1,8 +1,11 @@
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
+  ACESFilmicToneMapping,
   HalfFloatType,
   LinearEncoding,
+  NoToneMapping,
+  ReinhardToneMapping,
   Vector2,
   WebGLRenderTarget,
 } from "three";
@@ -18,7 +21,7 @@ const Spaceship = () => {
 
   /* The emissive intensity in the GLTF is always capped to 1,
      so let's increase it manually */
-  gltf.materials["Imphenzia"].emissiveIntensity = 2;
+  gltf.materials["Imphenzia"].emissiveIntensity = 1;
 
   return <primitive object={gltf.scene} />;
 };
@@ -37,7 +40,12 @@ const Scene = () => {
       );
 
       const sceneRenderPass = new RenderPass(scene, camera);
-      const unrealPass = new UnrealBloomPass(new Vector2(256, 256), 3, 1, 0.8);
+      const unrealPass = new UnrealBloomPass(
+        new Vector2(256, 256),
+        1.2,
+        0.01,
+        0.9
+      );
       const bloomPass = new BloomPass();
       const luminosityPass = new ShaderPass(LuminosityShader);
 
@@ -53,7 +61,7 @@ const Scene = () => {
   return (
     <>
       <ambientLight intensity={0.2} />
-      <directionalLight intensity={0.5} position={[10, 10, 10]} />
+      <directionalLight intensity={0.3} position={[10, 10, 10]} />
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
@@ -63,7 +71,7 @@ const Scene = () => {
         <meshStandardMaterial
           color="white"
           emissive="white"
-          emissiveIntensity={2}
+          emissiveIntensity={1}
         />
       </mesh>
 
@@ -79,7 +87,12 @@ const Scene = () => {
 };
 
 export const App = () => (
-  <Canvas gl={{ logarithmicDepthBuffer: true }}>
+  <Canvas
+    gl={{
+      logarithmicDepthBuffer: true,
+      toneMapping: NoToneMapping,
+    }}
+  >
     <color args={["#333"]} attach="background" />
     <Scene />
   </Canvas>
