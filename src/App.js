@@ -7,6 +7,7 @@ import {
   Vector2,
   WebGLRenderTarget,
 } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
@@ -16,6 +17,9 @@ import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js
 
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26_mod.gltf");
+
+  gltf.materials["Imphenzia"].emissiveIntensity = 1.5;
+
   return <primitive object={gltf.scene} />;
 };
 
@@ -53,8 +57,8 @@ const Scene = () => {
 
   return (
     <>
-      <ambientLight intensity={0.2} />
-      <directionalLight intensity={0.3} position={[10, 10, 10]} />
+      <ambientLight intensity={0.1} />
+      <directionalLight intensity={0.3} position={[-10, -10, -10]} />
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
