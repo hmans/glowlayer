@@ -22,7 +22,6 @@ const Spaceship = () => {
 
 const Scene = () => {
   let composer;
-  const innerScene = useRef();
 
   useFrame(({ gl, scene, camera }) => {
     if (!composer) {
@@ -58,10 +57,7 @@ const Scene = () => {
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
-      {/* LOL */}
-      <scene ref={innerScene}>
-        <Spaceship />
-      </scene>
+      <Spaceship />
     </>
   );
 };
