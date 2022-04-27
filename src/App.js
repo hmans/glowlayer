@@ -13,6 +13,7 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
+import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader.js";
 
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26_mod.gltf");
@@ -44,10 +45,12 @@ const Scene = () => {
       );
       const luminosityPass = new ShaderPass(LuminosityShader);
       const toneMappingPass = new AdaptiveToneMappingPass(true, 256);
+      const vignettePass = new ShaderPass(VignetteShader);
 
       composer.addPass(sceneRenderPass);
       composer.addPass(unrealPass);
       composer.addPass(toneMappingPass);
+      composer.addPass(vignettePass);
     }
 
     composer.render();
@@ -88,7 +91,7 @@ export const App = () => (
       toneMapping: NoToneMapping,
     }}
   >
-    <color args={["#555"]} attach="background" />
+    <color args={["#666"]} attach="background" />
     <Scene />
   </Canvas>
 );
