@@ -7,8 +7,7 @@ import {
   Vector2,
   WebGLRenderTarget,
 } from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
+import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
@@ -38,18 +37,17 @@ const Scene = () => {
 
       const sceneRenderPass = new RenderPass(scene, camera);
       const unrealPass = new UnrealBloomPass(
-        new Vector2(256, 256),
+        new Vector2(1024, 1024),
         1.2,
         0.01,
         0.9
       );
-      const bloomPass = new BloomPass();
       const luminosityPass = new ShaderPass(LuminosityShader);
+      const toneMappingPass = new AdaptiveToneMappingPass(true, 256);
 
       composer.addPass(sceneRenderPass);
-      // composer.addPass(luminosityPass);
       composer.addPass(unrealPass);
-      // composer.addPass(bloomPass);
+      composer.addPass(toneMappingPass);
     }
 
     composer.render();
@@ -57,8 +55,8 @@ const Scene = () => {
 
   return (
     <>
-      <ambientLight intensity={0.1} />
-      <directionalLight intensity={0.3} position={[-10, -10, -10]} />
+      <ambientLight intensity={0.4} />
+      <directionalLight intensity={0.6} position={[-10, -10, -10]} />
       <PerspectiveCamera position-z={30} makeDefault />
       <OrbitControls />
 
@@ -90,7 +88,7 @@ export const App = () => (
       toneMapping: NoToneMapping,
     }}
   >
-    <color args={["#333"]} attach="background" />
+    <color args={["#555"]} attach="background" />
     <Scene />
   </Canvas>
 );
