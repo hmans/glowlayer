@@ -17,7 +17,7 @@ import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26_mod.gltf");
 
-  gltf.materials["Imphenzia"].emissiveIntensity = 1.5;
+  gltf.materials["Imphenzia"].emissiveIntensity = 1;
 
   return <primitive object={gltf.scene} />;
 };
