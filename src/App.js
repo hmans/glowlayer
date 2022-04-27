@@ -6,7 +6,7 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 
 const Spaceship = () => {
-  const gltf = useGLTF("/models/spaceship26.gltf");
+  const gltf = useGLTF("/models/spaceship26_mod.gltf");
   return <primitive object={gltf.scene} />;
 };
 
