@@ -20,7 +20,7 @@ import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader.js";
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26_mod.gltf");
 
-  gltf.materials["Imphenzia"].emissiveIntensity = 2;
+  gltf.materials["Imphenzia"].emissiveIntensity = 1;
 
   return <primitive object={gltf.scene} />;
 };
@@ -43,7 +43,7 @@ const Scene = () => {
         new Vector2(window.innerWidth, window.innerHeight),
         1.2,
         0.8,
-        0.8
+        0.5
       );
       const luminosityPass = new ShaderPass(LuminosityShader);
       const toneMappingPass = new AdaptiveToneMappingPass(true, 256);
@@ -51,7 +51,7 @@ const Scene = () => {
 
       composer.addPass(sceneRenderPass);
       composer.addPass(unrealPass);
-      // composer.addPass(toneMappingPass);
+      composer.addPass(toneMappingPass);
       composer.addPass(vignettePass);
     }
 
