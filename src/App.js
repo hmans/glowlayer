@@ -109,9 +109,9 @@ export const Skybox = () => {
 
 export const App = () => (
   <Canvas
+    flat
     gl={{
       logarithmicDepthBuffer: true,
-      toneMapping: NoToneMapping,
     }}
   >
     <Skybox />
