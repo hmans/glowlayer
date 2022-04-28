@@ -23,6 +23,16 @@ const Spaceship = () => {
   return <primitive object={gltf.scene} />;
 };
 
+const RenderPipeline = () => (
+  <Effects disableGamma encoding={LinearEncoding} type={HalfFloatType}>
+    <unrealBloomPass
+      args={[new Vector2(window.innerWidth, window.innerHeight), 1.5, 0.0, 0.8]}
+    />
+    <adaptiveToneMappingPass args={[true, 256]} />
+    <shaderPass args={[VignetteShader]} />
+  </Effects>
+);
+
 export const App = () => (
   <Canvas
     flat
@@ -30,6 +40,7 @@ export const App = () => (
       logarithmicDepthBuffer: true,
     }}
   >
+    <RenderPipeline />
     <Skybox />
 
     <ambientLight intensity={0.5} />
@@ -54,18 +65,5 @@ export const App = () => (
     </mesh>
 
     <Spaceship />
-
-    <Effects disableGamma encoding={LinearEncoding} type={HalfFloatType}>
-      <unrealBloomPass
-        args={[
-          new Vector2(window.innerWidth, window.innerHeight),
-          1.5,
-          0.0,
-          0.8,
-        ]}
-      />
-      <adaptiveToneMappingPass args={[true, 256]} />
-      <shaderPass args={[VignetteShader]} />
-    </Effects>
   </Canvas>
 );
