@@ -1,11 +1,8 @@
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
-  CubeTextureLoader,
   HalfFloatType,
   LinearEncoding,
-  NoToneMapping,
   Vector2,
   WebGLRenderTarget,
 } from "three";
@@ -16,6 +13,7 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader.js";
+import { Skybox } from "./Skybox";
 
 const Spaceship = () => {
   const gltf = useGLTF("/models/spaceship26_mod.gltf");
@@ -84,27 +82,6 @@ const Scene = () => {
       <Spaceship />
     </>
   );
-};
-
-export const Skybox = () => {
-  const { scene } = useThree();
-
-  useEffect(() => {
-    const urls = [
-      "/textures/skybox/right.png",
-      "/textures/skybox/left.png",
-      "/textures/skybox/top.png",
-      "/textures/skybox/bottom.png",
-      "/textures/skybox/front.png",
-      "/textures/skybox/back.png",
-    ];
-
-    const cube = new CubeTextureLoader().load(urls);
-
-    scene.background = cube;
-  }, []);
-
-  return null;
 };
 
 export const App = () => (
